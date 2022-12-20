@@ -16,3 +16,23 @@ answer_one = array_of_lines.reduce(0) do |result, line|
   result + shape + outcome
 end
 puts answer_one # => 14264
+
+# -------------------- part two -----------------
+
+answer_two = array_of_lines.reduce(0) do |result, line|
+  case line
+  when /X/ then outcome = 0
+  when /Y/ then outcome = 3
+  when /Z/ then outcome = 6
+  end
+
+  case line
+  when "B Z", "A X", "C Y" then shape = 3
+  when "A Z", "B Y", "C X" then shape = 2
+  else shape = 1
+  end
+
+  result + outcome + shape
+end
+
+puts answer_two # => 12382
