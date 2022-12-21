@@ -1,11 +1,10 @@
-array_of_lines = File.readlines("input.txt", chomp: true)
+array_of_lines = File.readlines('input.txt', chomp: true)
 answer_one = array_of_lines.reduce(0) do |result, line|
-
-  case line
-  when "C X", "A Y", "B Z" then outcome = 6
-  when "A X", "B Y", "C Z" then outcome = 3
-  else outcome = 0
-  end
+  outcome = case line
+            when 'C X', 'A Y', 'B Z' then 6
+            when 'A X', 'B Y', 'C Z' then 3
+            else 0
+            end
 
   case line
   when /X/ then shape = 1
@@ -26,11 +25,11 @@ answer_two = array_of_lines.reduce(0) do |result, line|
   when /Z/ then outcome = 6
   end
 
-  case line
-  when "B Z", "A X", "C Y" then shape = 3
-  when "A Z", "B Y", "C X" then shape = 2
-  else shape = 1
-  end
+  shape = case line
+          when 'B Z', 'A X', 'C Y' then 3
+          when 'A Z', 'B Y', 'C X' then 2
+          else 1
+          end
 
   result + outcome + shape
 end
