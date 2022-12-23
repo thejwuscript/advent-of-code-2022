@@ -46,3 +46,17 @@ end
 # Solution: #map then #reduce
 
 puts shared_item_types.map { |item| find_priority(item) }.reduce(:+) # => 8176
+
+#--------Part Two--------
+
+common_item_types = []
+
+i = 0
+while i < rucksacks.length
+  group = rucksacks.slice(i, 3)
+  common_type = (group[0].split(//) & group[1].split(//) & group[2].split(//))[0]
+  common_item_types.push(common_type)
+  i += 3
+end
+
+puts common_item_types.map { |item| find_priority(item) }.reduce(:+) # => 2689
