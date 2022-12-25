@@ -22,3 +22,17 @@ lines.each do |line|
 end
 
 puts number_of_pairs
+
+# --------- Part Two -----------
+
+number_of_pairs = 0
+
+lines.each do |line|
+  a, b, c, d = line.split(/,|-/).map(&:to_i)
+  number_of_pairs += 1 if a.between?(c, d) ||
+                          b.between?(c, d) ||
+                          c.between?(a, b) ||
+                          d.between?(a, b)
+end
+
+puts number_of_pairs
