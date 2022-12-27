@@ -25,14 +25,14 @@ lines_of_crates = []
 lines = File.readlines('input.txt', chomp: true)
 
 i = 0
-while lines[i][0] == '['
+while lines[i][0..1] != " 1"
   lines_of_crates.push(lines[i])
   i += 1
 end
 
 lines_of_crates.map! { |str|
   new_str = str.gsub(/\[|\]/, '')
-  another_str = new_str.gsub(/\s\s\s\s/, ' nil')
+  another_str = new_str.gsub(/\s\s\s\s/, ' nil ')
   another_str.split(' ')
 }
 
@@ -55,4 +55,20 @@ organized_stacks = stacks_of_crates.map do |stack|
   stack.slice(0, index)
 end
 
-puts organized_stacks
+instruction_start_index = lines.index {|string| string.include?("move")}
+
+def move_boxes(move_times, from_stack, to_stack, array)
+  move_times.times do
+    if array[from_stack]
+      letter = array[from_stack].pop
+      array[to_stack].push(letter)
+    end
+  end
+end
+
+lines.slice(instruction_start_index..-1).each { |string| 
+  instructional_numbers = string.gsub(/\D/, ' ').split(' ').map(&:to_i)
+  move_boxes(instructional_numbers[0], instructional_numbers[1]-1, instructional_numbers[2]-1, organized_stacks)
+}
+
+puts organized_stacks.map! {|ary| ary[-1]}.join # => TQRFCBSJJ
