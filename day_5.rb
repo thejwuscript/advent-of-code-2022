@@ -66,9 +66,23 @@ def move_boxes(move_times, from_stack, to_stack, array)
   end
 end
 
-lines.slice(instruction_start_index..-1).each { |string| 
+# lines.slice(instruction_start_index..-1).each { |string| 
+#   instructional_numbers = string.gsub(/\D/, ' ').split(' ').map(&:to_i)
+#   move_boxes(instructional_numbers[0], instructional_numbers[1]-1, instructional_numbers[2]-1, organized_stacks)
+# }
+
+# puts organized_stacks.map! {|ary| ary[-1]}.join # => TQRFCBSJJ
+
+# ------------- Part Two -----------------
+
+def move_boxes9001(number_of_boxes, from_stack, to_stack, array)
+  boxes = array[from_stack].slice!(-number_of_boxes..-1)
+  array[to_stack].concat(boxes) # concat mutates the original array as opposed to the + operator
+end
+
+lines.slice(instruction_start_index..-1).each { |string|
   instructional_numbers = string.gsub(/\D/, ' ').split(' ').map(&:to_i)
-  move_boxes(instructional_numbers[0], instructional_numbers[1]-1, instructional_numbers[2]-1, organized_stacks)
+  move_boxes_9001(instructional_numbers[0], instructional_numbers[1]-1, instructional_numbers[2]-1, organized_stacks)
 }
 
-puts organized_stacks.map! {|ary| ary[-1]}.join # => TQRFCBSJJ
+puts organized_stacks.map! {|ary| ary[-1]}.join # => RMHFJNVFP
