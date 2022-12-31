@@ -21,6 +21,23 @@ index_counter = 3
 # output index_counter + 1
 #
 
+# while index_counter < input_string.length
+#   window_array.push(input_string[index_counter])
+#   if window_array.uniq.length == window_array.length
+#     break
+#   else
+#     window_array.shift
+#     index_counter += 1
+#   end
+# end
+
+# puts index_counter + 1 # => 1623
+
+#-------------- Part Two --------------
+
+window_array = input_string[0..12].split(//)
+index_counter = 13
+
 while index_counter < input_string.length
   window_array.push(input_string[index_counter])
   if window_array.uniq.length == window_array.length
@@ -31,4 +48,4 @@ while index_counter < input_string.length
   end
 end
 
-puts index_counter + 1 # => 1623
+puts index_counter + 1
